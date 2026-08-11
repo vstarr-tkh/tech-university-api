@@ -41,7 +41,13 @@ def close_connection(exception):
 @app.route("/users/<int:user_id>")
 def get_user_img(user_id):
     if "user" not in session:
-        return make_response("Unauthorized",401)
+        with app.app_context():
+            query="select users.img_url from faculty inner join users where faculty.id=users.id and users.id="+str(user_id)
+            cur=get_db().execute(query)
+            faculty=cur.fetchone()
+            cur.close()
+        if not faculty:
+            return make_response("Unauthorized",401)
     file_name="users/"+str(user_id)+".png"
     return send_file(file_name, mimetype="image/png")
 
