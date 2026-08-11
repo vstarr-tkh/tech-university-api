@@ -50,7 +50,7 @@ def get_students():
     if "user" not in session:
             return make_response("Unauthorized",401)
     with app.app_context():
-        query="select * from students inner join users where students.id=users.id"
+        query="select users.fname, users.lname, users.img_url, students.gpa, students.grade_level, users.id from students inner join users where students.id=users.id"
         cur=get_db().execute(query)
         students=cur.fetchall()
         cur.close()
@@ -70,7 +70,7 @@ def get_courses():
 @app.get("/faculty")
 def get_faculty():
     with app.app_context():
-        query="select * from faculty inner join users where faculty.id=users.id"
+        query="select users.fname, users.lname, users.img_url, faculty.bio, users.id from faculty inner join users where faculty.id=users.id"
         cur=get_db().execute(query)
         faculty=cur.fetchall()
         cur.close()
