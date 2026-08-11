@@ -148,7 +148,9 @@ def create_enrollment():
 def login():
         if "user" in session:
                 return make_response(session['user'],201)
-        username=request.json["username"]
+        username=request.json.get("username")
+        if not username:
+            return make_response("Unauthorized",401)
         with app.app_context():
             query="select * from users where user_name=\""+username+"\";"
             print("Query: "+query)
