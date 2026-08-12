@@ -152,7 +152,7 @@ def login():
         if not username:
             return make_response("Unauthorized",401)
         with app.app_context():
-            query="select * from users where user_name=\""+username+"\";"
+            query="select id, fname, lname, img_url,user_name from users where user_name=\""+username+"\";"
             print("Query: "+query)
             cur=get_db().execute(query)
             user=cur.fetchone()
