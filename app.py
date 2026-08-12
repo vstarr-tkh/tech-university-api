@@ -149,20 +149,21 @@ def login():
         if "user" in session:
                 return make_response(session['user'],201)
         username=request.json.get("username")
-        if not username:
+        password=request.json.get("password")
+        if not username or not password:
             return make_response("Unauthorized",401)
         with app.app_context():
-            query="select id, fname, lname, img_url,user_name from users where user_name=\""+username+"\";"
-            print("Query: "+query)
+            query="select id, fname, lname, img_url, password, user_name from users where user_name=\""+username+"\";"
             cur=get_db().execute(query)
             user=cur.fetchone()
             if not user:
                 resp=make_response("User does not exist",401)
                 return resp
-            password=check_password(request.json["password"],user["password"])
-            if not password:
+            passwordCheck=check_password(password,user.get("password"))
+            if not passwordCheck:
                 resp=make_response("Invalid username/password",401)
                 return resp
+            del user['password']
             session['user']=user
             resp=make_response(user,201)
             return resp
