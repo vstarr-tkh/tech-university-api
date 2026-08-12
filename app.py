@@ -173,3 +173,9 @@ def logout():
     if 'user' in session:
           session.pop("user",None)
     return make_response("",204)
+
+@app.get("/session")
+def get_session():
+     if "user" in session:
+        return make_response(session['user'],200)
+     return make_response("Unauthorized",401)
