@@ -9,7 +9,7 @@ DATABASE="./app.db"
 
 app=Flask(__name__)
 app.secret_key=os.getenv("SECRET_KEY")
-CORS(app)
+CORS(app,supports_credentials=True)
 bcrypt = Bcrypt(app)
 
 def create_password(password):
@@ -146,12 +146,15 @@ def create_enrollment():
 
 @app.post("/login")
 def login():
+        print("login")
         if "user" in session:
-                return make_response(session['user'],201)
+            resp=make_response(session['user'],201)
+            return resp
         username=request.json.get("username")
         password=request.json.get("password")
         if not username or not password:
-            return make_response("Unauthorized",401)
+            resp=make_response("Unauthorized",401)
+            return resp
         with app.app_context():
             query="select id, fname, lname, img_url, password, user_name from users where user_name=\""+username+"\";"
             cur=get_db().execute(query)
@@ -171,11 +174,15 @@ def login():
 @app.delete("/logout")
 def logout():
     if 'user' in session:
-          session.pop("user",None)
+        session.pop("user",None)
     return make_response("",204)
 
 @app.get("/session")
 def get_session():
      if "user" in session:
-        return make_response(session['user'],200)
-     return make_response("Unauthorized",401)
+        resp=make_response(session['user'],200)
+        return resp
+     else:
+        print("no user in session")
+        resp=make_response("Unauthorized",401)
+        return resp
