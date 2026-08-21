@@ -1,6 +1,6 @@
 import sqlite3
-from flask import Flask, request, make_response, g, redirect, url_for, send_file, session
-from flask_cors import CORS
+from flask import Flask, request, make_response, g, send_file, session
+from flask_cors import CORS,logging
 from flask_bcrypt import Bcrypt
 import os
 from dotenv import load_dotenv
@@ -9,8 +9,9 @@ DATABASE="./app.db"
 
 app=Flask(__name__)
 app.secret_key=os.getenv("SECRET_KEY")
-CORS(app,supports_credentials=True)
+CORS(app,supports_credentials=True, origins=["http://localhost:5500","https://tech-university-ui.netlify.app/"])
 bcrypt = Bcrypt(app)
+logging.getLogger('flask_cors').level = logging.DEBUG
 
 def create_password(password):
     pw_hash = bcrypt.generate_password_hash(password).decode("utf-8")
