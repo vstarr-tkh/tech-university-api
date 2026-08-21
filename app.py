@@ -9,7 +9,7 @@ DATABASE="./app.db"
 
 app=Flask(__name__)
 app.secret_key=os.getenv("SECRET_KEY")
-CORS(app,supports_credentials=True, origins=["http://127.0.0.1:5500/","https://tech-university-ui.netlify.app/"])
+CORS(app,supports_credentials=True, origins=["http://127.0.0.1:5500","https://tech-university-ui.netlify.app"])
 bcrypt = Bcrypt(app)
 logging.getLogger('flask_cors').level = logging.DEBUG
 
