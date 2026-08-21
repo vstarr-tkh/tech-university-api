@@ -22,3 +22,5 @@
     - Endpoint for logging out a user
 - /session
     - Endpoint for getting user session
+
+**Note**: Further testing and development may be needed
