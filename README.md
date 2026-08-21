@@ -2,7 +2,7 @@
 
 Description: Application Programming Interface (API) for Tech University
 
-Tech University is a full-stack web application where students can sign up for courses.  There is an API component that interacts with a SQL database and handles authentications and authorizations.  There is also a UI component.  You can check out the UI component via this [link](https://github.com/vstarr-tkh/tech-university-ui).  Session cookies are used to authenticate users.  JSON is the data format used for transferring data between the UI and the API.  The end points for the API are:
+Tech University is a full-stack web application where students can sign up for courses.  There is an Application Programming Interface (API) component that interacts with a SQL database and handles authentications and authorizations.  There is also a User Interface (UI) component.  You can check out the UI component via this [link](https://github.com/vstarr-tkh/tech-university-ui).  Session cookies are used to authenticate users.  JSON is the data format used for transferring data between the UI and the API.  The end points for the API are:
 
 - /users/{userId}
     - End point for fetching user profile images
