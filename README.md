@@ -23,4 +23,4 @@
 - /session
     - Endpoint for getting user session
 
-**Note**: Further testing and development may be needed
+**Note**: Further testing and development may be needed.  The API is hosted using the free version of the Render hosting platform so startup could take some time.
